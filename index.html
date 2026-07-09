@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jeynko Delivery</title>
+<title>Jeynko Delivery | Share Your Location</title>
+
+<link rel="icon" type="image/png" href="./logo.png">
 
 <style>
 *{
@@ -39,18 +41,19 @@ body{
   height:auto;
   display:block;
   margin:0 auto 20px;
+  filter:drop-shadow(0 0 15px rgba(255,122,0,.35));
 }
 
 .brand{
   color:#FF7A00;
-  font-size:38px;
+  font-size:36px;
   font-weight:bold;
   margin-bottom:10px;
 }
 
 .tagline{
   color:#ccc;
-  font-size:17px;
+  font-size:16px;
   line-height:1.8;
   margin-bottom:30px;
 }
@@ -80,8 +83,8 @@ button{
   font-size:18px;
   font-weight:bold;
   cursor:pointer;
-  transition:.25s;
   margin-top:15px;
+  transition:.25s;
 }
 
 button:active{
@@ -91,6 +94,7 @@ button:active{
 #gpsBtn{
   background:#FF7A00;
   color:#fff;
+  box-shadow:0 0 25px rgba(255,122,0,.45);
 }
 
 #gpsBtn.success{
@@ -150,6 +154,13 @@ button:active{
   border-radius:15px;
   margin-top:12px;
   color:#ddd;
+}
+
+.footer{
+  margin-top:25px;
+  color:#999;
+  font-size:14px;
+  line-height:1.8;
 }
 </style>
 </head>
@@ -220,6 +231,10 @@ JEYNKO DELIVERY
   <div class="feature">🛵 خدمة توصيل بالسكوتر</div>
 </div>
 
+<div class="footer">
+🔒 يتم استخدام موقعك فقط لتحديد مكان التسليم.
+</div>
+
 </div>
 
 <script>
@@ -261,6 +276,7 @@ function startGPS(){
       lat = position.coords.latitude;
       lon = position.coords.longitude;
 
+      btn.classList.remove("error");
       btn.classList.add("success");
       btn.innerHTML = "✅ تم تحديد موقعك";
 
@@ -272,6 +288,7 @@ function startGPS(){
 
     function(){
 
+      btn.classList.remove("success");
       btn.classList.add("error");
       btn.innerHTML = "❌ تعذر تحديد الموقع";
 
@@ -298,7 +315,7 @@ function sendSMS(){
   }
 
   const message =
-  "السلام عليكم، هذا هو موقعي:\n\nhttps://maps.google.com/?q=" +
+  "📍 Jeynko Delivery\n\nموقعي الحالي:\nhttps://maps.google.com/?q=" +
   lat + "," + lon;
 
   window.location.href =
