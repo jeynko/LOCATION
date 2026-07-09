@@ -7,49 +7,53 @@
 
 <style>
 body{
-font-family:Arial,sans-serif;
-background:#f4f4f4;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-margin:0;
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f2f2f2;
 }
 
-.box{
-background:#fff;
-width:90%;
-max-width:400px;
-padding:25px;
-border-radius:15px;
-box-shadow:0 0 15px rgba(0,0,0,.15);
-text-align:center;
+.container{
+    max-width:420px;
+    margin:40px auto;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 0 10px rgba(0,0,0,.15);
+    text-align:center;
 }
 
 h2{
-color:#0A84FF;
-margin-bottom:15px;
+    color:#007BFF;
 }
 
 p{
-line-height:1.8;
-font-size:17px;
+    line-height:1.8;
+    font-size:17px;
 }
 
 button{
-margin-top:20px;
-width:100%;
-padding:16px;
-font-size:20px;
-background:#0A84FF;
-color:#fff;
-border:none;
-border-radius:10px;
-cursor:pointer;
+    width:100%;
+    padding:16px;
+    margin-top:15px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    color:white;
+    cursor:pointer;
 }
 
-button:hover{
-background:#0066cc;
+#gpsBtn{
+    background:#007BFF;
+}
+
+#sendBtn{
+    background:#28A745;
+}
+
+#status{
+    margin-top:15px;
+    font-weight:bold;
+    color:green;
 }
 </style>
 
@@ -57,61 +61,57 @@ background:#0066cc;
 
 <body>
 
-<div class="box">
+<div class="container">
 
-<h2>📍 إرسال موقعك</h2>
+<h2>📍 مشاركة موقعك</h2>
 
 <p>
-
-اضغط على الزر بالأسفل.<br><br>
-
-1️⃣ اضغط <b>سماح</b> عند طلب الوصول إلى موقعك.<br><br>
-
-2️⃣ سيتم فتح تطبيق الرسائل تلقائياً.<br><br>
-
-3️⃣ اضغط <b>إرسال</b> فقط.
-
+<b>الخطوة الأولى</b><br>
+اضغط على زر <b>تشغيل GPS</b> ثم اضغط <b>سماح</b> عندما يطلب الهاتف الإذن.
 </p>
 
-<button onclick="sendLocation()">
-📍 إرسال موقعي
+<button id="gpsBtn" onclick="startGPS()">
+📡 تشغيل GPS
+</button>
+
+<div id="status"></div>
+
+<hr style="margin:25px 0;">
+
+<p>
+<b>الخطوة الثانية</b><br>
+بعد ظهور رسالة <b>تم تحديد موقعك بنجاح</b> اضغط على الزر التالي.
+</p>
+
+<button id="sendBtn" onclick="sendSMS()">
+📩 إرسال موقعي عبر رسالة SMS
 </button>
 
 </div>
 
 <script>
 
-function sendLocation(){
+let lat="";
+let lon="";
 
-if(!navigator.geolocation){
+function startGPS(){
 
-alert("هذا الهاتف لا يدعم تحديد الموقع.");
-
-return;
-
-}
+document.getElementById("status").innerHTML="⏳ جاري تحديد موقعك...";
 
 navigator.geolocation.getCurrentPosition(
 
 function(position){
 
-const lat=position.coords.latitude;
+lat=position.coords.latitude;
+lon=position.coords.longitude;
 
-const lon=position.coords.longitude;
-
-const link="https://maps.google.com/?q="+lat+","+lon;
-
-const text=
-"السلام عليكم، هذا هو موقعي الحالي:\n\n"+link;
-
-window.location.href=
-"sms:0556261246?body="+encodeURIComponent(text);
+document.getElementById("status").innerHTML="✅ تم تحديد موقعك بنجاح";
 
 },
 
 function(){
 
-alert("يرجى السماح بالوصول إلى الموقع.");
+document.getElementById("status").innerHTML="❌ يرجى الضغط على (سماح) لتحديد موقعك.";
 
 }
 
@@ -119,8 +119,22 @@ alert("يرجى السماح بالوصول إلى الموقع.");
 
 }
 
+function sendSMS(){
+
+if(lat==""){
+
+alert("يرجى تشغيل GPS أولاً.");
+
+return;
+
+}
+
+let message="السلام عليكم، هذا هو موقعي:\nhttps://maps.google.com/?q="+lat+","+lon;
+  window.location.href="sms:0556261246?body="+encodeURIComponent(message);
+
+}
+
 </script>
 
 </body>
-
 </html>
