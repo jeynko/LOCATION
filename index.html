@@ -1,328 +1,236 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>إرسال الموقع</title>
 
 <style>
-
 *{
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
 }
 
 body{
-
-margin:0;
-padding:20px;
-background:#f2f2f2;
-
+  margin:0;
+  padding:20px;
+  background:#f2f2f2;
 }
 
 .container{
-
-max-width:420px;
-margin:auto;
-background:white;
-padding:25px;
-border-radius:15px;
-box-shadow:0 0 15px rgba(0,0,0,.15);
-
+  max-width:420px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 0 15px rgba(0,0,0,.15);
 }
 
 h1{
-
-text-align:center;
-color:#0d6efd;
-font-size:24px;
-
+  text-align:center;
+  color:#0d6efd;
+  font-size:24px;
 }
 
 p{
-
-font-size:17px;
-line-height:1.8;
-
+  font-size:17px;
+  line-height:1.8;
 }
 
 button{
-
-width:100%;
-padding:16px;
-font-size:19px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-color:white;
-margin-top:15px;
-transition:.3s;
-
+  width:100%;
+  padding:16px;
+  font-size:19px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  color:white;
+  margin-top:15px;
+  transition:.3s;
 }
 
 #gpsBtn{
-
-background:#0d6efd;
-
+  background:#0d6efd;
 }
 
 #gpsBtn.success{
-
-background:#198754;
-
+  background:#198754;
 }
 
 #gpsBtn.error{
-
-background:#dc3545;
-
+  background:#dc3545;
 }
 
 #sendBtn{
-
-background:#198754;
-display:none;
-
+  background:#198754;
+  display:none;
 }
 
 #status{
-
-margin-top:20px;
-font-size:18px;
-font-weight:bold;
-text-align:center;
-
+  margin-top:20px;
+  font-size:18px;
+  font-weight:bold;
+  text-align:center;
 }
 
 .help{
-
-background:#fff7e6;
-padding:15px;
-border-radius:10px;
-margin-top:20px;
-display:none;
-
+  background:#fff7e6;
+  padding:15px;
+  border-radius:10px;
+  margin-top:20px;
+  display:none;
 }
 
 .help h3{
-
-margin-top:0;
-color:#d35400;
-
+  margin-top:0;
+  color:#d35400;
 }
 
 ul{
-
-padding-right:20px;
-
+  padding-right:20px;
 }
 
 li{
-
-margin-bottom:10px;
-
+  margin-bottom:10px;
 }
-
 </style>
 
 </head>
-
 <body>
 
 <div class="container">
 
-<h1>
-📍 إرسال موقعك
-</h1>
+<h1>📍 إرسال موقعك</h1>
 
 <p>
-
 <b>الخطوة الأولى</b>
-
 <br><br>
-
 اضغط على الزر التالي ثم اختر
-
 <b>سماح</b>
-
 عند ظهور طلب الوصول إلى الموقع.
-
 </p>
 
 <button id="gpsBtn" onclick="startGPS()">
-
 📡 تشغيل الموقع (GPS)
-
 </button>
 
 <div id="status"></div>
 
 <button id="sendBtn" onclick="sendSMS()">
-
 📩 إرسال موقعي عبر رسالة SMS
-
 </button>
 
 <div class="help" id="helpBox">
 
-<h3>
-
-❌ إذا لم يظهر طلب السماح بالموقع
-
-</h3>
+<h3>📍 تعذر تحديد موقعك</h3>
 
 <p>
-
-قد تكون رفضت الوصول إلى الموقع في محاولة سابقة.
-
+يبدو أن خدمة الموقع (GPS) غير مفعلة أو تعذر الوصول إليها.
 </p>
 
 <ul>
-
-<li>أغلق الصفحة.</li>
-
-<li>
-
-امسح بيانات التطبيق.
-
-</li>
-
-<li>
-
-قد تجدها باسم:
-
-<br><br>
-
-🇸🇦 مسح بيانات التطبيق
-
-<br>
-
-🇫🇷 Effacer les données
-
-<br>
-
-🇬🇧 Delete app data / Clear app data
-
-</li>
-
-<li>
-
-افتح الرابط مرة أخرى.
-
-</li>
-
-<li>
-
-اضغط تشغيل الموقع ثم اختر
-
-<b>سماح</b>.
-
-</li>
-
+<li>قم بتشغيل خدمة الموقع (GPS) من إعدادات الهاتف.</li>
+<li>تأكد من السماح بالوصول إلى الموقع إذا طُلب منك ذلك.</li>
+<li>بعد تشغيل GPS، قم بإعادة تحميل الصفحة.</li>
+<li>اضغط على زر <b>تشغيل الموقع (GPS)</b> مرة أخرى.</li>
 </ul>
 
+<button onclick="location.reload()">
+🔄 إعادة تحميل الصفحة
+</button>
+
 </div>
+
+</div>
+
 <script>
 
-let lat="";
-let lon="";
+let lat = "";
+let lon = "";
 
 function startGPS(){
 
-const btn=document.getElementById("gpsBtn");
-const status=document.getElementById("status");
-const sendBtn=document.getElementById("sendBtn");
-const help=document.getElementById("helpBox");
+  const btn = document.getElementById("gpsBtn");
+  const status = document.getElementById("status");
+  const sendBtn = document.getElementById("sendBtn");
+  const help = document.getElementById("helpBox");
 
-btn.classList.remove("success");
-btn.classList.remove("error");
+  btn.classList.remove("success","error");
 
-status.style.color="#0d6efd";
-status.innerHTML="⏳ جاري تحديد موقعك...";
+  status.style.color = "#0d6efd";
+  status.innerHTML = "⏳ جاري تحديد موقعك...";
 
-help.style.display="none";
-sendBtn.style.display="none";
+  help.style.display = "none";
+  sendBtn.style.display = "none";
 
-if(!navigator.geolocation){
+  if(!navigator.geolocation){
 
-btn.classList.add("error");
-btn.innerHTML="❌ هذا الهاتف لا يدعم GPS";
-status.style.color="red";
-status.innerHTML="هذا الهاتف لا يدعم خدمة تحديد الموقع.";
-help.style.display="block";
-return;
+    btn.classList.add("error");
+    btn.innerHTML = "❌ هذا الهاتف لا يدعم GPS";
 
-}
+    status.style.color = "red";
+    status.innerHTML = "هذا الهاتف لا يدعم خدمة تحديد الموقع.";
 
-navigator.geolocation.getCurrentPosition(
+    help.style.display = "block";
+    return;
+  }
 
-function(position){
+  navigator.geolocation.getCurrentPosition(
 
-lat=position.coords.latitude;
-lon=position.coords.longitude;
+    function(position){
 
-btn.classList.remove("error");
-btn.classList.add("success");
-btn.innerHTML="✅ تم تحديد موقعك بنجاح";
+      lat = position.coords.latitude;
+      lon = position.coords.longitude;
 
-status.style.color="green";
-status.innerHTML="يمكنك الآن إرسال موقعك.";
+      btn.classList.remove("error");
+      btn.classList.add("success");
+      btn.innerHTML = "✅ تم تحديد موقعك بنجاح";
 
-sendBtn.style.display="block";
+      status.style.color = "green";
+      status.innerHTML = "يمكنك الآن إرسال موقعك.";
 
-},
+      sendBtn.style.display = "block";
+    },
 
-function(){
+    function(){
 
-btn.classList.remove("success");
-btn.classList.add("error");
-btn.innerHTML="❌ فشل تشغيل الموقع - اضغط للمحاولة مرة أخرى";
+      btn.classList.remove("success");
+      btn.classList.add("error");
+      btn.innerHTML = "❌ تعذر تحديد الموقع";
 
-status.style.color="red";
-status.innerHTML="تعذر الحصول على الموقع.";
+      status.style.color = "red";
+      status.innerHTML = "يرجى تشغيل GPS وإعادة تحميل الصفحة.";
 
-help.style.display="block";
+      help.style.display = "block";
+    },
 
-},
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    }
 
-{
-
-enableHighAccuracy:true,
-timeout:10000,
-maximumAge:0
-
-}
-
-);
-
+  );
 }
 
 function sendSMS(){
 
-if(lat==="" || lon===""){
+  if(lat === "" || lon === ""){
+    alert("يرجى تشغيل GPS أولاً.");
+    return;
+  }
 
-alert("يرجى تشغيل GPS أولاً.");
+  const message =
+    "السلام عليكم، هذا هو موقعي:\n\nhttps://maps.google.com/?q=" +
+    lat + "," + lon;
 
-return;
-
-}
-
-const message=
-"السلام عليكم، هذا هو موقعي:\n\nhttps://maps.google.com/?q="+lat+","+lon;
-
-window.location.href=
-"sms:0556261246?body="+encodeURIComponent(message);
-
+  window.location.href =
+    "sms:0556261246?body=" + encodeURIComponent(message);
 }
 
 </script>
 
-</div>
-
 </body>
-
 </html>
+```
