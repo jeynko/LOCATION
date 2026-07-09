@@ -35,13 +35,17 @@ align-items:center;
 padding:20px;
 
 background:
-radial-gradient(circle at top,rgba(255,122,0,.25),transparent 40%),
+radial-gradient(circle at top,rgba(255,122,0,.30),transparent 40%),
+radial-gradient(circle at bottom,rgba(255,122,0,.12),transparent 40%),
 #050505;
 
 color:white;
 
 }
 
+
+
+/* الحاوية */
 
 .container{
 
@@ -50,6 +54,9 @@ max-width:480px;
 
 }
 
+
+
+/* البطاقة */
 
 .card{
 
@@ -63,12 +70,41 @@ padding:35px 25px;
 
 text-align:center;
 
-backdrop-filter:blur(15px);
+backdrop-filter:blur(20px);
 
-box-shadow:0 0 50px rgba(255,122,0,.15);
+box-shadow:
+
+0 20px 60px rgba(0,0,0,.8),
+0 0 40px rgba(255,122,0,.20);
+
+
+animation:cardShow .8s ease;
 
 }
 
+
+
+@keyframes cardShow{
+
+from{
+
+opacity:0;
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+
+
+/* الشعار */
 
 .logo{
 
@@ -76,10 +112,60 @@ width:170px;
 
 filter:drop-shadow(0 0 20px #ff7a00);
 
+animation:
+
+logoEnter 1s ease,
+logoPulse 3s infinite 1s;
+
 }
 
 
+
+@keyframes logoEnter{
+
+from{
+
+opacity:0;
+
+transform:scale(.5) rotate(-20deg);
+
+}
+
+to{
+
+opacity:1;
+
+transform:scale(1) rotate(0);
+
+}
+
+}
+
+
+
+@keyframes logoPulse{
+
+0%,100%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.06);
+
+}
+
+}
+
+
+
+/* الاسم */
+
 .brand{
+
+margin-top:15px;
 
 font-size:34px;
 
@@ -87,11 +173,11 @@ font-weight:900;
 
 color:#ff7a00;
 
-margin-top:15px;
-
 }
 
 
+
+/* الوصف */
 
 .tagline{
 
@@ -101,9 +187,8 @@ line-height:2;
 
 color:#ddd;
 
-font-size:16px;
-
 }
+
 
 
 .tagline i{
@@ -118,6 +203,8 @@ margin-left:8px;
 
 
 
+/* صندوق الموقع */
+
 .box{
 
 margin-top:30px;
@@ -131,6 +218,7 @@ padding:25px;
 }
 
 
+
 .box h2{
 
 color:#ff7a00;
@@ -138,6 +226,15 @@ color:#ff7a00;
 margin-bottom:15px;
 
 }
+
+
+
+.box h2 i{
+
+margin-left:8px;
+
+}
+
 
 
 .box p{
@@ -149,6 +246,8 @@ line-height:2;
 }
 
 
+
+/* الازرار */
 
 button{
 
@@ -164,7 +263,7 @@ margin-top:20px;
 
 font-size:18px;
 
-font-weight:bold;
+font-weight:900;
 
 cursor:pointer;
 
@@ -176,7 +275,7 @@ transition:.3s;
 
 button:hover{
 
-transform:translateY(-3px);
+transform:translateY(-4px);
 
 }
 
@@ -188,6 +287,8 @@ background:#ff7a00;
 
 color:white;
 
+box-shadow:0 10px 30px rgba(255,122,0,.35);
+
 }
 
 
@@ -197,6 +298,7 @@ color:white;
 background:#00b96b;
 
 }
+
 
 
 #gpsBtn.error{
@@ -219,6 +321,8 @@ color:white;
 
 
 
+/* الحالة */
+
 #status{
 
 margin-top:20px;
@@ -228,6 +332,8 @@ font-size:17px;
 }
 
 
+
+/* المميزات */
 
 .features{
 
@@ -263,17 +369,7 @@ margin-left:10px;
 
 
 
-.footer{
-
-margin-top:25px;
-
-font-size:13px;
-
-color:#999;
-
-}
-
-
+/* المساعدة */
 
 .help{
 
@@ -303,6 +399,8 @@ color:#ff7a00;
 
 margin-top:10px;
 
+color:#ddd;
+
 }
 
 
@@ -316,7 +414,31 @@ color:white;
 }
 
 
+
+/* الفوتر */
+
+.footer{
+
+margin-top:25px;
+
+color:#999;
+
+font-size:13px;
+
+}
+
+
+
+.footer i{
+
+color:#ff7a00;
+
+}
+
+
+
 </style>
+
 
 </head>
 
@@ -331,25 +453,36 @@ color:white;
 <div class="card">
 
 
-<img src="./logo.png" class="logo">
+<img src="./logo.png" class="logo" alt="Jeynko Delivery">
+
 
 
 <div class="brand">
+
 JEYNKO DELIVERY
+
 </div>
+
 
 
 <div class="tagline">
 
+
 <i class="fa-solid fa-motorcycle"></i>
+
 توصيل سريع بالسكوتر
+
 
 <br>
 
+
 <i class="fa-solid fa-location-dot"></i>
+
 شارك موقعك وسنصل إليك بسرعة
 
+
 </div>
+
 
 
 
@@ -357,22 +490,34 @@ JEYNKO DELIVERY
 
 
 <h2>
+
 <i class="fa-solid fa-map-location-dot"></i>
- مشاركة الموقع
+
+مشاركة الموقع
+
 </h2>
 
 
+
 <p>
-اضغط على الزر ثم اختر السماح للوصول إلى موقعك.
+
+اضغط على الزر ثم اختر السماح حتى يتمكن السائق من الوصول إليك.
+
 </p>
+
+
 
 
 <button id="gpsBtn" onclick="startGPS()">
 
+
 <i class="fa-solid fa-location-crosshairs"></i>
- مشاركة موقعي
+
+مشاركة موقعي
+
 
 </button>
+
 
 
 
@@ -380,31 +525,40 @@ JEYNKO DELIVERY
 
 
 
+
 <button id="sendBtn" onclick="sendSMS()">
 
+
 <i class="fa-solid fa-paper-plane"></i>
- إرسال الموقع
+
+إرسال الموقع
+
 
 </button>
 
 
 
+
 <div class="help" id="helpBox">
 
+
 <h3>
+
 تعذر تحديد الموقع
+
 </h3>
 
 
 <ul>
 
-<li>شغل GPS في الهاتف.</li>
+<li>تأكد من تشغيل GPS.</li>
 
 <li>اسمح للمتصفح باستخدام الموقع.</li>
 
-<li>أعد تحميل الصفحة.</li>
+<li>أعد تحميل الصفحة وحاول مرة أخرى.</li>
 
 </ul>
+
 
 
 <button class="reload-btn" onclick="location.reload()">
@@ -418,6 +572,7 @@ JEYNKO DELIVERY
 
 
 </div>
+
 
 
 
@@ -453,6 +608,7 @@ JEYNKO DELIVERY
 </div>
 
 
+
 </div>
 
 
@@ -466,11 +622,11 @@ JEYNKO DELIVERY
 </div>
 
 
-</div>
-
 
 </div>
 
+
+</div>
 
 
 
@@ -482,16 +638,18 @@ let lat="";
 let lon="";
 
 
+
 function startGPS(){
 
 
-let btn=document.getElementById("gpsBtn");
+const btn=document.getElementById("gpsBtn");
 
-let status=document.getElementById("status");
+const status=document.getElementById("status");
 
-let send=document.getElementById("sendBtn");
+const send=document.getElementById("sendBtn");
 
-let help=document.getElementById("helpBox");
+const help=document.getElementById("helpBox");
+
 
 
 btn.className="";
@@ -501,9 +659,21 @@ send.style.display="none";
 help.style.display="none";
 
 
+
 status.style.color="#ff7a00";
 
 status.innerHTML="جاري تحديد موقعك...";
+
+
+
+if(!navigator.geolocation){
+
+status.innerHTML="المتصفح لا يدعم تحديد الموقع";
+
+return;
+
+}
+
 
 
 
@@ -518,9 +688,10 @@ lat=position.coords.latitude;
 lon=position.coords.longitude;
 
 
+
 btn.classList.add("success");
 
-btn.innerHTML="تم تحديد الموقع";
+btn.innerHTML="تم تحديد الموقع بنجاح";
 
 
 status.style.color="#00b96b";
@@ -572,12 +743,15 @@ maximumAge:0
 
 
 
+
 function sendSMS(){
 
 
 let message=
 
-"Jeynko Delivery\n\nموقعي:\nhttps://maps.google.com/?q="+lat+","+lon;
+"Jeynko Delivery\n\nموقعي الحالي:\nhttps://maps.google.com/?q="
+
++lat+","+lon;
 
 
 
@@ -589,9 +763,10 @@ window.location.href=
 }
 
 
+
 </script>
 
 
-</body>
 
+</body>
 </html>
