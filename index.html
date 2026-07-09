@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -26,9 +25,8 @@ body{
 
 .container{
   width:100%;
-  max-width:430px;
+  max-width:500px;
   background:#151515;
-  border:1px solid #222;
   border-radius:30px;
   padding:30px 25px;
   text-align:center;
@@ -36,8 +34,8 @@ body{
 }
 
 .logo{
-  width:160px;
-  max-width:80%;
+  width:180px;
+  max-width:70%;
   height:auto;
   display:block;
   margin:0 auto 20px;
@@ -45,21 +43,21 @@ body{
 
 .brand{
   color:#FF7A00;
-  font-size:30px;
+  font-size:38px;
   font-weight:bold;
   margin-bottom:10px;
 }
 
 .tagline{
   color:#ccc;
-  font-size:16px;
+  font-size:17px;
   line-height:1.8;
   margin-bottom:30px;
 }
 
 .card{
-  background:#1C1C1C;
-  border-radius:20px;
+  background:#1D1D1D;
+  border-radius:22px;
   padding:25px;
 }
 
@@ -70,30 +68,29 @@ body{
 
 .card p{
   color:#ddd;
-  line-height:1.8;
-  margin-bottom:20px;
+  line-height:1.9;
+  margin-bottom:25px;
 }
 
 button{
   width:100%;
   border:none;
-  border-radius:16px;
-  padding:17px;
+  border-radius:18px;
+  padding:18px;
   font-size:18px;
   font-weight:bold;
   cursor:pointer;
+  transition:.25s;
   margin-top:15px;
-  transition:.3s;
 }
 
 button:active{
-  transform:scale(.97);
+  transform:scale(.98);
 }
 
 #gpsBtn{
   background:#FF7A00;
   color:#fff;
-  box-shadow:0 0 20px rgba(255,122,0,.35);
 }
 
 #gpsBtn.success{
@@ -111,16 +108,16 @@ button:active{
 }
 
 #status{
-  margin-top:20px;
+  margin-top:18px;
   font-size:17px;
-  line-height:1.8;
+  line-height:1.7;
 }
 
 .help{
   display:none;
   margin-top:20px;
   background:#2A1A0F;
-  border:1px solid rgba(255,122,0,.3);
+  border:1px solid rgba(255,122,0,.25);
   border-radius:18px;
   padding:20px;
   text-align:right;
@@ -144,13 +141,13 @@ button:active{
 }
 
 .features{
-  margin-top:30px;
+  margin-top:25px;
 }
 
 .feature{
-  background:#1C1C1C;
-  border-radius:15px;
+  background:#1D1D1D;
   padding:15px;
+  border-radius:15px;
   margin-top:12px;
   color:#ddd;
 }
@@ -161,7 +158,14 @@ button:active{
 
 <div class="container">
 
-<img src="./logo.png" class="logo" alt="Jeynko Delivery Logo">
+<img
+  src="./logo.png"
+  class="logo"
+  alt="Jeynko Delivery"
+  width="180"
+  height="180"
+  loading="eager"
+  decoding="async">
 
 <div class="brand">
 JEYNKO DELIVERY
@@ -179,7 +183,7 @@ JEYNKO DELIVERY
 <p>
 اضغط على الزر التالي ثم اختر
 <b>«سماح»</b>
-حتى يتمكن سائق Jeynko Delivery من الوصول إليك.
+حتى يتمكن سائق Jeynko Delivery من الوصول إليك بسرعة.
 </p>
 
 <button id="gpsBtn" onclick="startGPS()">
@@ -199,7 +203,7 @@ JEYNKO DELIVERY
 <ul>
 <li>تأكد من تشغيل خدمة الموقع (GPS).</li>
 <li>إذا ظهر طلب الوصول إلى الموقع اختر «سماح».</li>
-<li>بعد تشغيل GPS قم بإعادة تحميل الصفحة ثم حاول مرة أخرى.</li>
+<li>بعد تشغيل GPS قم بإعادة تحميل الصفحة.</li>
 </ul>
 
 <button class="reload-btn" onclick="location.reload()">
@@ -211,24 +215,15 @@ JEYNKO DELIVERY
 </div>
 
 <div class="features">
-
-<div class="feature">
-⚡ توصيل سريع
-</div>
-
-<div class="feature">
-📍 وصول دقيق إلى موقعك
-</div>
-
-<div class="feature">
-🛵 خدمة توصيل بالسكوتر
-</div>
-
+  <div class="feature">⚡ توصيل سريع</div>
+  <div class="feature">📍 وصول دقيق إلى موقعك</div>
+  <div class="feature">🛵 خدمة توصيل بالسكوتر</div>
 </div>
 
 </div>
 
 <script>
+
 let lat = "";
 let lon = "";
 
@@ -266,7 +261,6 @@ function startGPS(){
       lat = position.coords.latitude;
       lon = position.coords.longitude;
 
-      btn.classList.remove("error");
       btn.classList.add("success");
       btn.innerHTML = "✅ تم تحديد موقعك";
 
@@ -278,7 +272,6 @@ function startGPS(){
 
     function(){
 
-      btn.classList.remove("success");
       btn.classList.add("error");
       btn.innerHTML = "❌ تعذر تحديد الموقع";
 
@@ -305,15 +298,15 @@ function sendSMS(){
   }
 
   const message =
-    "السلام عليكم، هذا هو موقعي:\n\nhttps://maps.google.com/?q=" +
-    lat + "," + lon;
+  "السلام عليكم، هذا هو موقعي:\n\nhttps://maps.google.com/?q=" +
+  lat + "," + lon;
 
   window.location.href =
-    "sms:0556261246?body=" +
-    encodeURIComponent(message);
+  "sms:0556261246?body=" +
+  encodeURIComponent(message);
 }
+
 </script>
 
 </body>
 </html>
-```
