@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,22 +17,39 @@ margin:0;
 }
 
 .box{
-background:white;
-padding:30px;
+background:#fff;
+width:90%;
+max-width:400px;
+padding:25px;
 border-radius:15px;
+box-shadow:0 0 15px rgba(0,0,0,.15);
 text-align:center;
-box-shadow:0 0 10px rgba(0,0,0,.2);
-max-width:350px;
+}
+
+h2{
+color:#0A84FF;
+margin-bottom:15px;
+}
+
+p{
+line-height:1.8;
+font-size:17px;
 }
 
 button{
-background:#25D366;
-color:white;
+margin-top:20px;
+width:100%;
+padding:16px;
+font-size:20px;
+background:#0A84FF;
+color:#fff;
 border:none;
-padding:15px 25px;
-font-size:18px;
 border-radius:10px;
 cursor:pointer;
+}
+
+button:hover{
+background:#0066cc;
 }
 </style>
 
@@ -41,43 +58,69 @@ cursor:pointer;
 <body>
 
 <div class="box">
-<h2>📍 إرسال الموقع</h2>
 
-<p>اضغط على الزر ثم وافق على مشاركة موقعك.</p>
+<h2>📍 إرسال موقعك</h2>
 
-<button onclick="sendLocation()">إرسال موقعي</button>
+<p>
+
+اضغط على الزر بالأسفل.<br><br>
+
+1️⃣ اضغط <b>سماح</b> عند طلب الوصول إلى موقعك.<br><br>
+
+2️⃣ سيتم فتح تطبيق الرسائل تلقائياً.<br><br>
+
+3️⃣ اضغط <b>إرسال</b> فقط.
+
+</p>
+
+<button onclick="sendLocation()">
+📍 إرسال موقعي
+</button>
+
 </div>
 
 <script>
 
 function sendLocation(){
 
-if(navigator.geolocation){
+if(!navigator.geolocation){
 
-navigator.geolocation.getCurrentPosition(function(position){
+alert("هذا الهاتف لا يدعم تحديد الموقع.");
 
-let lat=position.coords.latitude;
-let lon=position.coords.longitude;
+return;
 
-let phone="213556261246";
-
-let text=encodeURIComponent(
-"مرحبًا، هذا موقعي: https://maps.google.com/?q="+lat+","+lon
-);
-
-window.location.href="https://wa.me/"+phone+"?text="+text;
-
-},function(){
-alert("تعذر الحصول على الموقع.");
-});
-
-}else{
-alert("هذا المتصفح لا يدعم تحديد الموقع.");
 }
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+const lat=position.coords.latitude;
+
+const lon=position.coords.longitude;
+
+const link="https://maps.google.com/?q="+lat+","+lon;
+
+const text=
+"السلام عليكم، هذا هو موقعي الحالي:\n\n"+link;
+
+window.location.href=
+"sms:0556261246?body="+encodeURIComponent(text);
+
+},
+
+function(){
+
+alert("يرجى السماح بالوصول إلى الموقع.");
+
+}
+
+);
 
 }
 
 </script>
 
 </body>
+
 </html>
